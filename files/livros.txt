@@ -1,0 +1,4 @@
+O Pequeno Princípe;9943;99.8;false;Antoine Saint-Exupéry;98
+Crime e Castigo;123456;19.99;true;Fiódor Dostoiévski;671
+Cem Anos de Solidão;789012;25.99;true;Gabriel García Márquez;417
+O Senhor dos Anéis;345678;34.99;true;J.R.R. Tolkien;1178

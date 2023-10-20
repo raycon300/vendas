@@ -1,0 +1,6 @@
+João;93844244890;joao@gan.com
+Maria;9876543210;maria@email.com
+Pedro;8765432109;pedro@email.com
+Ana;7654321098;ana@email.com
+Carlos;6543210987;carlos@email.com
+Sofia;5432109876;sofia@email.com
