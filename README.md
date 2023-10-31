@@ -25,7 +25,12 @@ Para executar o projeto, certifique-se de ter o Maven e o Spring Boot instalados
    ```bash
    cd vendas
    ```
-3. Execute o comando abaixo para executar o projeto:
+3. Execute o comando abaixo para iniciar ums instancia do banco de dados MySQL em um container Docker:
+
+   ```bash
+   docker-compose up -d
+   ``` 
+4. Execute o comando abaixo para executar o projeto:
 
    ```bash
    mvn spring-boot:run

@@ -1,25 +1,31 @@
 package br.edu.infnet.vendas.model.service;
 
 import br.edu.infnet.vendas.model.domain.Vendedor;
+import br.edu.infnet.vendas.model.repository.VendedorRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class VendedorService {
 
-    private final Map<String, Vendedor> vendedores = new HashMap<>();
+    private final VendedorRepository vendedorRepository;
+
+    public VendedorService(VendedorRepository vendedorRepository) {
+        this.vendedorRepository = vendedorRepository;
+    }
 
 
     public void incluir(Vendedor vendedor) {
-        vendedores.putIfAbsent(vendedor.getCpf(), vendedor);
+        vendedorRepository.save(vendedor);
     }
 
 
     public List<Vendedor> obterLista() {
-        return new ArrayList<>(vendedores.values());
+        return vendedorRepository.findAll();
+    }
+
+    public Vendedor findById(Integer id) {
+        return vendedorRepository.findById(id).orElseThrow();
     }
 }

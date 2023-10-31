@@ -4,12 +4,14 @@ import br.edu.infnet.vendas.model.domain.Vendedor;
 import br.edu.infnet.vendas.model.service.VendedorService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 
 @Component
+@Order(1)
 public class VendedorLoader implements ApplicationRunner {
 
     private static final String FILE_NAME = "files/vendedores.txt";

@@ -1,14 +1,22 @@
 package br.edu.infnet.vendas.model.domain;
 
-import java.util.ArrayList;
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
+@Table(name = "vendedores")
 public class Vendedor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String nome;
     private String cpf;
     private String email;
-    private List<Produto> produtos = new ArrayList<>();
+    @OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
+    private List<Produto> produtos;
 
     public String getNome() {
         return nome;
@@ -42,12 +50,16 @@ public class Vendedor {
         this.produtos = produtos;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "Vendedor{" +
-                "nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return "Vendedor{" + "id=" + id + ", nome=" + nome + ", cpf=" + cpf +", email=" + email +'}';
     }
 }

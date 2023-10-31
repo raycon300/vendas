@@ -2,20 +2,27 @@ package br.edu.infnet.vendas;
 
 import br.edu.infnet.vendas.model.domain.Literatura;
 import br.edu.infnet.vendas.model.domain.Produto;
+import br.edu.infnet.vendas.model.domain.Vendedor;
 import br.edu.infnet.vendas.model.domain.Vestuario;
 import br.edu.infnet.vendas.model.service.ProdutoService;
+import br.edu.infnet.vendas.model.service.VendedorService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Objects;
 
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 @Component
+@Order(2)
 public class ProdutoLoader implements ApplicationRunner {
 
     private static final String FILES_NAME = "files/produtos.txt";
@@ -29,31 +36,39 @@ public class ProdutoLoader implements ApplicationRunner {
     private static final int NUMERO_DE_PAGINAS = 6;
     private static final int TAMANHO = 5;
     private static final int COR = 6;
+    private static final int ID_VENDEDOR = 7;
     private static final String LIVRO = "L";
     private static final String ROUPA = "R";
     private final ProdutoService produtoService;
+    private final VendedorService vendedorService;
 
 
-    public ProdutoLoader(ProdutoService produtoService) {
+    public ProdutoLoader(ProdutoService produtoService,
+                         VendedorService vendedorService) {
         this.produtoService = produtoService;
+        this.vendedorService = vendedorService;
     }
 
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+        final var vendedores = new LinkedHashMap<Integer, Vendedor>();
         try (var bufferedReader = new BufferedReader(new FileReader(FILES_NAME))) {
             String linha;
 
             while ((linha = bufferedReader.readLine()) != null) {
                 String[] params = linha.split(SEPARADOR);
                 Produto produto = criarProduto(params);
+                var email = Integer.valueOf(params[ID_VENDEDOR]);
+                var vendedor = vendedores.computeIfAbsent(email, vendedorService::findById);
+                produto.setVendedor(vendedor);
                 produtoService.incluir(produto);
             }
         }
         imprimirItensCarregados();
+        imprimirProdutosPorVendedor(vendedorService.obterLista());
     }
-
 
     private Produto criarProduto(String[] params) {
         var tipo = params[TIPO];
@@ -96,4 +111,20 @@ public class ProdutoLoader implements ApplicationRunner {
         produtoService.obterLista().forEach(System.out::println);
         System.out.println("\n");
     }
+
+    private void imprimirProdutosPorVendedor(List<Vendedor> vendedors) {
+        System.out.println("------------------Produtos por vendedor------------------");
+        vendedors.forEach(vendedor -> {
+            System.out.println("Produtos do vendedor: " + vendedor.getNome());
+            var result = produtoService.obterLista(vendedor.getId());
+            if(Objects.isNull(result) || result.isEmpty()) {
+                System.out.println("Nenhum produto encontrado");
+
+            } else {
+                    result.forEach(System.out::println);
+            }
+            System.out.println("\n");
+        });
+    }
+
 }

@@ -1,3 +1,2 @@
-Camisa Polo;5683;29.99;true;M;Preto
-Jaqueta de couro;67890;79.99;true;M;Marrom
-Camisa social;98765;39.99;true;M;Branco
+Camisa Polo;5683;29.99;true;M;Preto;3
+Jaqueta de couro;67890;79.99;true;M;Marrom;4

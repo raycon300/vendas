@@ -1,7 +1,3 @@
-L;O Pequeno Princípe;9943;99.8;false;Antoine Saint-Exupéry;98
-L;Crime e Castigo;123456;19.99;true;Fiódor Dostoiévski;671
-L;Cem Anos de Solidão;789012;25.99;true;Gabriel García Márquez;417
-L;O Senhor dos Anéis;345678;34.99;true;J.R.R. Tolkien;1178
-R;Camisa Polo;5683;29.99;true;M;Preto
-R;Jaqueta de couro;67890;79.99;true;M;Marrom
-R;Camisa social;98765;39.99;true;M;Branco
+L;O Pequeno Princípe;9943;99.8;false;Antoine Saint-Exupéry;98;1
+L;Crime e Castigo;123456;19.99;true;Fiódor Dostoiévski;671;5
+R;Camisa social;98765;39.99;true;M;Branco;2

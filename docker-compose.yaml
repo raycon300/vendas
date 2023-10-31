@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+#  api_service:
+#    build: . # https://medium.com/thefreshwrites/the-way-of-dockerize-a-spring-boot-and-mysql-application-with-docker-compose-de2fc03c6a42
+#    restart: always
+#    ports:
+#      - 8080:8080
+#    networks:
+#      - springapimysql-net
+#    environment:
+#      - spring.datasource.url=jdbc:mysql://mysqldb:3306/basics?allowPublicKeyRetrieval=true
+#    depends_on:
+#      - mysqldb
+#
+#    volumes:
+#      - .m2:/root/.m2
+
+  mysqldb:
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - app-net
+    environment:
+      MYSQL_DATABASE: dbJava
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: pass
+networks:
+  app-net:

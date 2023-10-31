@@ -1,10 +1,21 @@
 package br.edu.infnet.vendas.model.domain;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "produtos")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Produto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String descricao;
     private int codigo;
     private float preco;
     private boolean estoque;
+
+    @ManyToOne
+    private Vendedor vendedor;
 
     public String getDescricao() {
         return descricao;
@@ -38,8 +49,24 @@ public class Produto {
         this.estoque = estoque;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
+
     @Override
     public String toString() {
-        return "Produto{" + "descricao=" + descricao + ", codigo=" + codigo + ", preco=" + preco + ", estoque=" + estoque + '}';
+        return "Produto{" + "id="+ id + "descricao=" + descricao + ", codigo=" + codigo + ", preco=" + preco + ", estoque=" + estoque + ", vendedor=" + vendedor +'}';
     }
 }

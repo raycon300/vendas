@@ -1,25 +1,35 @@
 package br.edu.infnet.vendas.model.service;
 
 import br.edu.infnet.vendas.model.domain.Produto;
+import br.edu.infnet.vendas.model.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ProdutoService {
 
-    private final Map<Integer, Produto> produtos = new HashMap<>();
+    private final ProdutoRepository produtoRepository;
+
+    public ProdutoService(ProdutoRepository produtoRepository) {
+        this.produtoRepository = produtoRepository;
+    }
 
 
     public void incluir(Produto produto) {
-        produtos.putIfAbsent(produto.getCodigo(), produto);
+        produtoRepository.save(produto);
     }
 
 
     public List<Produto> obterLista() {
-        return new ArrayList<>(produtos.values());
+        return produtoRepository.findAll();
+    }
+
+    public Boolean isProdutoNaoCadastrado(String descricao){
+        return produtoRepository.findByDescricao(descricao).isEmpty();
+    }
+
+    public List<Produto> obterLista(Integer id) {
+        return produtoRepository.obterLista(id);
     }
 }

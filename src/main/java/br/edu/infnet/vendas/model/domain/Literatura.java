@@ -1,5 +1,10 @@
 package br.edu.infnet.vendas.model.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "literaturas")
 public class Literatura extends Produto {
 
     private String autor;
@@ -23,10 +28,6 @@ public class Literatura extends Produto {
 
     @Override
     public String toString() {
-        return "Livro{" +
-                "autor='" + autor + '\'' +
-                ", numeroDePaginas=" + numeroDePaginas +
-                ", " + super.toString() +
-                '}';
+        return "Livro{" + "autor=" + autor + ", numeroDePaginas=" + numeroDePaginas + ", " + super.toString() + '}';
     }
 }
