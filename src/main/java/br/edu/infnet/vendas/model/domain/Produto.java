@@ -1,6 +1,7 @@
 package br.edu.infnet.vendas.model.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "produtos")
@@ -9,12 +10,19 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotBlank(message = "O campo descrição é obrigatório")
     private String descricao;
+
+    @PositiveOrZero(message = "O campo código deve ser maior ou igual a 0")
     private int codigo;
+
+    @Positive(message = "O campo preço deve ser maior que 0")
     private float preco;
     private boolean estoque;
 
     @ManyToOne
+    @NotNull(message = "O campo vendedor é obrigatório")
     private Vendedor vendedor;
 
     public String getDescricao() {
@@ -67,6 +75,6 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Produto{" + "id="+ id + "descricao=" + descricao + ", codigo=" + codigo + ", preco=" + preco + ", estoque=" + estoque + ", vendedor=" + vendedor +'}';
+        return  id + " - " + descricao + " - " + codigo + " - " + preco + " - " + estoque + " - " + vendedor;
     }
 }

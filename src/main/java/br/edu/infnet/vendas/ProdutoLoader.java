@@ -63,7 +63,7 @@ public class ProdutoLoader implements ApplicationRunner {
                 var email = Integer.valueOf(params[ID_VENDEDOR]);
                 var vendedor = vendedores.computeIfAbsent(email, vendedorService::findById);
                 produto.setVendedor(vendedor);
-                produtoService.incluir(produto);
+                incluir(produto);
             }
         }
         imprimirItensCarregados();
@@ -98,6 +98,14 @@ public class ProdutoLoader implements ApplicationRunner {
         return literatura;
     }
 
+
+    private void incluir(Produto produto) {
+        try {
+            produtoService.incluir(produto);
+        } catch (Exception e) {
+            System.out.println("Erro ao incluir produto: " + e.getMessage());
+        }
+    }
 
     private void popularInformacoesBase(String[] params, Produto produto) {
         produto.setDescricao(params[DESCRICAO]);

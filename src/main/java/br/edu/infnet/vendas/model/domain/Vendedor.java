@@ -1,11 +1,16 @@
 package br.edu.infnet.vendas.model.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.List;
 
 @Entity
-@Table(name = "vendedores")
+@Table(name = "vendedores",
+uniqueConstraints = {
+        @UniqueConstraint(name = "uk_vendedor", columnNames = {"cpf", "email"})
+})
 public class Vendedor {
 
     @Id
@@ -13,8 +18,16 @@ public class Vendedor {
     private Integer id;
 
     private String nome;
+
+    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", message = "O campo cpf deve ser um cpf válido")
     private String cpf;
+
+    @Email(regexp = "^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "O campo email deve ser um email válido")
     private String email;
+
+    @Embedded
+    private Endereco endereco;
+
     @OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
     private List<Produto> produtos;
 
@@ -58,8 +71,16 @@ public class Vendedor {
         this.id = id;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
     @Override
     public String toString() {
-        return "Vendedor{" + "id=" + id + ", nome=" + nome + ", cpf=" + cpf +", email=" + email +'}';
+        return id + " - " + nome + " - " + cpf +" - " + email + " - " + endereco;
     }
 }

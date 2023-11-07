@@ -24,4 +24,12 @@ public class LiteraturaService {
     public List<Literatura> obterLista() {
         return literaturaRepository.findAll();
     }
+
+    public long obterQuantidade() {
+        return literaturaRepository.count();
+    }
+
+    public void excluir(Integer id) {
+        literaturaRepository.deleteById(id);
+    }
 }

@@ -1,5 +1,6 @@
 package br.edu.infnet.vendas;
 
+import br.edu.infnet.vendas.model.domain.Produto;
 import br.edu.infnet.vendas.model.domain.Vendedor;
 import br.edu.infnet.vendas.model.domain.Vestuario;
 import br.edu.infnet.vendas.model.service.ProdutoService;
@@ -59,7 +60,7 @@ public class VestuarioLoader implements ApplicationRunner {
                 if( produtoService.isProdutoNaoCadastrado(produto.getDescricao())) {
                     var vendedor = vendedores.computeIfAbsent(idVendedor, vendedorService::findById);
                     produto.setVendedor(vendedor);
-                    produtoService.incluir(produto);
+                    incluir(produto);
                 }
             }
         }
@@ -76,6 +77,15 @@ public class VestuarioLoader implements ApplicationRunner {
         vestuario.setTamanho(params[TAMANHO]);
         vestuario.setCor(params[COR]);
         return vestuario;
+    }
+
+
+    private void incluir(Produto produto) {
+        try {
+            produtoService.incluir(produto);
+        } catch (Exception e) {
+            System.out.println("Erro ao incluir vesturario: " + e.getMessage());
+        }
     }
 
 

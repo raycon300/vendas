@@ -1,6 +1,7 @@
 package br.edu.infnet.vendas;
 
 import br.edu.infnet.vendas.model.domain.Literatura;
+import br.edu.infnet.vendas.model.domain.Produto;
 import br.edu.infnet.vendas.model.domain.Vendedor;
 import br.edu.infnet.vendas.model.service.LiteraturaService;
 import br.edu.infnet.vendas.model.service.ProdutoService;
@@ -58,7 +59,7 @@ public class LiteraturaLoader implements ApplicationRunner {
                 if( produtoService.isProdutoNaoCadastrado(produto.getDescricao())) {
                     var vendedor = vendedores.computeIfAbsent(idVendedor, vendedorService::findById);
                     produto.setVendedor(vendedor);
-                    produtoService.incluir(produto);
+                    incluir(produto);
                 }
             }
         }
@@ -77,6 +78,14 @@ public class LiteraturaLoader implements ApplicationRunner {
         return literatura;
     }
 
+
+    private void incluir(Produto produto) {
+        try {
+            produtoService.incluir(produto);
+        } catch (Exception e) {
+            System.out.println("Erro ao incluir literatura: " + e.getMessage());
+        }
+    }
 
     private void imprimirItensCarregados() {
         System.out.println("------------------Livros carregadas------------------");

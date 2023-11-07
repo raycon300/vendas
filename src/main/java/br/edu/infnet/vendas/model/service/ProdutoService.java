@@ -32,4 +32,12 @@ public class ProdutoService {
     public List<Produto> obterLista(Integer id) {
         return produtoRepository.obterLista(id);
     }
+
+    public long obterQuantidade() {
+        return produtoRepository.count();
+    }
+
+    public void excluir(Integer id) {
+        produtoRepository.deleteById(id);
+    }
 }

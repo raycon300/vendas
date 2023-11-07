@@ -28,4 +28,12 @@ public class VendedorService {
     public Vendedor findById(Integer id) {
         return vendedorRepository.findById(id).orElseThrow();
     }
+
+    public long obterQuantidade() {
+        return vendedorRepository.count();
+    }
+
+    public void excluir(Integer id) {
+        vendedorRepository.deleteById(id);
+    }
 }

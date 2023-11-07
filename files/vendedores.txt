@@ -1,6 +1,9 @@
-João;93844244890;joao@gan.com
-Maria;9876543210;maria@email.com
-Pedro;8765432109;pedro@email.com
-Ana;7654321098;ana@email.com
-Carlos;6543210987;carlos@email.com
-Sofia;5432109876;sofia@email.com
+João;938.442.448-90;joao@gan.com;20031170
+Maria;987.654.321-10;maria@email.com;20041020
+Pedro;876.543.210-29;pedro@email.com;20031160
+Ana;765.432.109-18;ana@email.com;20041020
+Carlos;654.321.098-07;carlos@email.com;20090040
+Sofia;543.210.987-68;sofia@email.com;20051040
+Leba;963.210.987-46;sofia@email;20021130
+Niak;145.288.900-08;sofia@email.com;20021000
+Rakirdo;365.288.900-08;rankid@email.com;2002100E

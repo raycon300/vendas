@@ -24,4 +24,12 @@ public class VestuarioService {
     public List<Vestuario> obterLista() {
         return vestuarioRepository.findAll();
     }
+
+    public long obterQuantidade() {
+        return vestuarioRepository.count();
+    }
+
+    public void excluir(Integer id) {
+        vestuarioRepository.deleteById(id);
+    }
 }
