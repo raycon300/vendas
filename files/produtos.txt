@@ -1,4 +1,0 @@
-L;O Pequeno Princípe;9943;99.8;false;Antoine Saint-Exupéry;98;1
-L;Crime e Castigo;123456;19.99;true;Fiódor Dostoiévski;671;5
-R;Camisa social;98765;39.99;true;M;Branco;2
-R;Camisa polo;7677;-49.89;true;M;Amarelo;2
